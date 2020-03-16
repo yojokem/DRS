@@ -1,0 +1,41 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>net.frostq</groupId>
+  <artifactId>drs</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <name>Data Retention System</name>
+  <description>자료 영구 보존 시스템</description>
+  
+  <properties>
+  	<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+  </properties>
+  
+  <dependencies>
+  	<dependency>
+  		<groupId>org.json</groupId>
+  		<artifactId>json</artifactId>
+  		<version>20190722</version>
+  	</dependency>
+  	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>8.0.19</version>
+	</dependency>
+	<dependency>
+		<groupId>com.google.guava</groupId>
+		<artifactId>guava</artifactId>
+		<version>28.2-jre</version>
+	</dependency>
+  </dependencies>
+  
+  <distributionManagement>
+    <repository>
+        <id>release</id>
+        <url>https://github.com/yojokem/FQ-maven-repo/raw/master/releases</url>
+    </repository>
+    <snapshotRepository>
+        <id>snapshot</id>
+        <url>https://github.com/yojokem/FQ-maven-repo/raw/master/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
