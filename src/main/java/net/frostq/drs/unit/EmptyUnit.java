@@ -11,4 +11,17 @@ public final class EmptyUnit extends Unit {
 		
 		setId(-1);
 	}
+	
+	@Override
+	public Unit setContent(Buffer content) {
+		return this;
+	}
+	
+	public static long generateId() {
+		return -1;
+	}
+	
+	public static boolean verifyId(long id) {
+		return id == generateId();
+	}
 }

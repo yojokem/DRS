@@ -11,14 +11,17 @@ public class Units {
 	public static final int MAX_SIZE = 256;
 	
 	private Unit[] unit = new Unit[MAX_SIZE];
+	private boolean closedUp = false;
 	
 	public void setSize(int size, int offset) {
+		if(closedUp) return;
 		Unit[] temp = new Unit[size];
 		System.arraycopy(unit, offset, temp, 0, size);
 		this.unit = temp;
 	}
 	
 	public void add(Unit u) {
+		if(closedUp) return;
 		Unit[] temp = new Unit[this.unit.length + 1];
 		System.arraycopy(unit, 0, temp, 0, this.unit.length);
 		temp[temp.length - 1] = u;
@@ -26,6 +29,7 @@ public class Units {
 	}
 	
 	public void set(int index, Unit u) {
+		if(closedUp) return;
 		assert index >= 0;
 		assert unit.length > index;
 		
@@ -33,6 +37,7 @@ public class Units {
 	}
 	
 	public void remove(Unit u) {
+		if(closedUp) return;
 		Streams.stream(Lists.newArrayList(this.unit).iterator())
 			.reduce(new BinaryOperator<Unit>() {
 				@Override
@@ -43,7 +48,11 @@ public class Units {
 	}
 	
 	public void remove(int index) {
+		if(closedUp) return;
+		assert index >= 0;
+		assert unit.length > index;
 		
+		unit[index] = EmptyUnit.INSTANCE;
 	}
 	
 	public void trim() {
@@ -51,6 +60,6 @@ public class Units {
 	}
 	
 	public void closeUp() {
-		
+		closedUp = true;
 	}
 }

@@ -28,6 +28,10 @@ public class Unit {
 		return this.content;
 	}
 	
+	public static long generateId() {
+		
+	}
+	
 	public static boolean verifyId(long id) {
 		
 	}
