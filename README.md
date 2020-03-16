@@ -13,9 +13,17 @@
     - 파일 내외부 동시 보관 (외부 디렉터리/데이터베이스)
       <br> Database Reading/Write
       File Internal/External Concurrent Store (External Directories/Database)
-      
+ <br>
+  ◎  물리 자료 보관소 위치 체계화
+      <br> Systematization of the locating of physical data storage
+ <br>
   ○
   <br><br>
   ◎: 주요 기능; Main function
   <br>
   ○: 비주요 기능; Sub function
+  
+  <br><br><br>
+## Participation ㆍ 참여
+  If you want to take part in DRS, please write a Issue with your contacts.
+  참여를 원하시는 분께서는 Issue에 연락처와 함께 기재해 주시기 바랍니다.
