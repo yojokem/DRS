@@ -10,49 +10,39 @@ public class Units {
 	public List<Long> unitPackages = Lists.newArrayList();
 	public static final int MAX_SIZE = 256;
 	
-	private Unit[] unit = new Unit[MAX_SIZE];
+	private List<Unit> unit = Lists.newArrayList();
 	private boolean closedUp = false;
 	
-	public void setSize(int size, int offset) {
+	public void setSize(int offset) {
 		if(closedUp) return;
-		Unit[] temp = new Unit[size];
-		System.arraycopy(unit, offset, temp, 0, size);
-		this.unit = temp;
+		unit = unit.subList(offset, unit.size() - 1);
 	}
 	
 	public void add(Unit u) {
 		if(closedUp) return;
-		Unit[] temp = new Unit[this.unit.length + 1];
-		System.arraycopy(unit, 0, temp, 0, this.unit.length);
-		temp[temp.length - 1] = u;
-		this.unit = temp;
+		unit.add(u);
 	}
 	
 	public void set(int index, Unit u) {
 		if(closedUp) return;
-		assert index >= 0;
-		assert unit.length > index;
-		
-		unit[index] = u;
+		unit.set(index, u);
 	}
 	
-	public void remove(Unit u) {
-		if(closedUp) return;
-		Streams.stream(Lists.newArrayList(this.unit).iterator())
-			.reduce(new BinaryOperator<Unit>() {
-				@Override
-				public Unit apply(Unit t, Unit u) {
-					return null;
-				}
-			}); //인터넷 검색하기
+	public boolean remove(Unit u) {
+		if(closedUp) return false;
+		int count = 0, i;
+		while((i = unit.indexOf(u)) >= 0) {
+			unit.set(i, EmptyUnit.INSTANCE);
+			count++;
+		}
+		
+		return count > 0;
 	}
 	
 	public void remove(int index) {
 		if(closedUp) return;
-		assert index >= 0;
-		assert unit.length > index;
-		
-		unit[index] = EmptyUnit.INSTANCE;
+		if(unit.get(index) != null)
+			unit.set(index, EmptyUnit.INSTANCE);
 	}
 	
 	public void trim() {
