@@ -2,6 +2,7 @@ package net.frostq.drs.unit;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import com.google.common.collect.Lists;
 
@@ -27,11 +28,35 @@ public class Units {
 		this.unit.set(index, u);
 	}
 	
+	public List<Unit> get(int[] offset, int[] size) {
+		if(size.length > 1)
+			assert offset.length == size.length;
+		else assert size.length == 1;
+		
+		int[] sortedOffset = IntStream.of(offset).sorted().toArray();
+		
+		List<Unit> temp = Lists.newArrayList();
+		
+		
+		
+		return temp;
+	}
+	
+	public Unit[] get(int offset, int size) {
+		assert offset >= 0;
+		assert size > 0;
+		return this.unit.subList(offset, offset + size - 1).toArray(new Unit[] {});
+	}
+	
+	public Unit get(int offset) {
+		return this.get(offset, 1)[0];
+	}
+	
 	public boolean remove(Unit u) {
 		if(this.closedUp) return false;
 		int count = 0, i;
-		while((i = unit.indexOf(u)) >= 0) {
-			unit.set(i, EmptyUnit.INSTANCE);
+		while((i = this.unit.indexOf(u)) >= 0) {
+			this.unit.set(i, EmptyUnit.INSTANCE);
 			count++;
 		}
 		
