@@ -6,16 +6,32 @@ import java.util.stream.IntStream;
 
 import com.google.common.collect.Lists;
 
+/**
+ * Middle Unit : 중위단위체(衆位單位體) / 중위집단(衆位集團)
+ * @author FrostQ
+ * @serial groupName
+ *
+ */
 public class Units {
 	public static final List<Long> unitPackages = Lists.newArrayList();
 	public static final int MAX_SIZE = 256;
 	
+	private String groupName = "";
 	private List<Unit> unit = Lists.newArrayList();
 	private boolean closedUp = false;
 	
 	public void setSize(int offset) {
 		if(this.closedUp) return;
 		this.unit = unit.subList(offset, unit.size() - 1);
+	}
+	
+	public int size() {
+		return this.unit.size();
+	}
+	
+	public int realSize() {
+		return Long.valueOf(this.unit.parallelStream().filter(x -> !x.isEmpty())
+				.count()).intValue();
 	}
 	
 	public void add(Unit u) {
@@ -70,7 +86,7 @@ public class Units {
 	}
 	
 	public void trim() {
-		unit.parallelStream().filter(x -> !x.getContent().equals(EmptyUnit.INSTANCE.getContent()))
+		unit.parallelStream().filter(x -> !x.isEmpty())
 			.sorted(new Comparator<Unit>() {
 				@Override
 				public int compare(Unit o1, Unit o2) {
@@ -85,11 +101,12 @@ public class Units {
 	
 	public void close() {
 		unitPackages.removeIf(x -> unit.parallelStream().anyMatch(y -> y.getId() == x.longValue()));
+		this.unit.forEach(x -> x.release());
 		this.unit.clear();
 	}
 	
 	public boolean existsIn(Unit unit) {
-		return this.unit.contains(unit);
+		return this.unit.contains(unit) || existsIn(unit.getId());
 	}
 	
 	public boolean existsIn(long id) {

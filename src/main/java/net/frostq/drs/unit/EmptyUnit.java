@@ -9,12 +9,8 @@ public final class EmptyUnit extends Unit {
 	private EmptyUnit(Buffer buffer) {
 		super(buffer);
 		
-		setId(-1);
-	}
-	
-	@Override
-	public Unit setContent(Buffer content) {
-		return this;
+		this.setId(-1);
+		this.allocate();
 	}
 	
 	public static long generateId() {

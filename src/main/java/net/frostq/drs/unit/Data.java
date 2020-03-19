@@ -1,5 +1,11 @@
 package net.frostq.drs.unit;
 
+/**
+ * Data Unit : 전위집단체(全位集團體) / 자료체
+ * @author FrostQ
+ * @serial name
+ *
+ */
 public class Data {
 	
 	
