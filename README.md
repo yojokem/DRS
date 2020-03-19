@@ -12,6 +12,7 @@
  + 물리 자료 보관소 위치 체계화   
  Systematization of the locating of physical data storage
  + 자료체의 단위체화
+   + 소위단위체 -> 중위단위체 -> 전위집단체 / 단위체 -> 중위집단 -> 자료체
  + 자료 전달체의 독립
  
 
