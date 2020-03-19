@@ -1,15 +1,19 @@
 package net.frostq.drs.unit;
 
+import net.frostq.drs.store.Store;
+
 /**
  * Data Unit : 전위집단체(全位集團體) / 자료체
  * @author FrostQ
  * @serial name
  *
  */
-public class Data {
-	
+public class Data extends Store {
+	private static final long serialVersionUID = 4966512505959630472L;
 	private String name;
-	// private Date organized; 처리 방식 연구 필요
+	private long organized = System.currentTimeMillis();
+	
+	
 	
 	public void repack(Units...unitses) {
 		
@@ -18,6 +22,8 @@ public class Data {
 	public void packAlso(Units units) {
 		
 	}
+	
+	
 	
 	public void unpack() {
 		

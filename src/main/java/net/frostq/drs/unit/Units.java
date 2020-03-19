@@ -1,12 +1,14 @@
 package net.frostq.drs.unit;
 
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
 import com.google.common.collect.Lists;
+
+import net.frostq.drs.ConsolePrinter;
+import net.frostq.drs.store.Store;
 
 /**
  * Middle Unit : 중위단위체(衆位單位體) / 중위집단(衆位集團)
@@ -14,8 +16,8 @@ import com.google.common.collect.Lists;
  * @serial groupName
  *
  */
-public class Units implements Serializable {
-	private static final long serialVersionUID = 7206857199594050799L;
+public class Units extends Store implements ConsolePrinter {
+	private static final long serialVersionUID = 3557080564434746456L;
 	public static final List<Long> unitPackages = Lists.newArrayList();
 	public static final int MAX_SIZE = 256;
 	
@@ -105,6 +107,10 @@ public class Units implements Serializable {
 			});
 	}
 	
+	protected void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+	
 	public String getGroupName() {
 		return this.groupName;
 	}
@@ -114,9 +120,12 @@ public class Units implements Serializable {
 	}
 	
 	public void close() {
+		this.info("I'm gonna be closed!");
 		unitPackages.removeIf(x -> unit.parallelStream().anyMatch(y -> y.getId() == x.longValue()));
 		this.unit.forEach(x -> x.release());
 		this.unit.clear();
+		this.info("Closed units list. Releasing the group name.");
+		
 	}
 	
 	public boolean existsIn(Unit unit) {
@@ -129,5 +138,27 @@ public class Units implements Serializable {
 	
 	public static boolean exists(long unitId) {
 		return unitPackages.contains(unitId);
+	}
+
+	@Override
+	public String getPrefix() {
+		return "[Units] 〔" + this.getGroupName() + "〕";
+	}
+
+	@Override
+	public String getSuffix() {
+		return "";
+	}
+	
+	private boolean debugging = false;
+
+	@Override
+	public void setDebugging(boolean debugging) {
+		this.debugging = debugging;
+	}
+
+	@Override
+	public boolean isDebugging() {
+		return this.debugging;
 	}
 }

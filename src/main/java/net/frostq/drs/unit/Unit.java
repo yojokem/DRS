@@ -3,13 +3,17 @@ package net.frostq.drs.unit;
 import java.nio.Buffer;
 import java.util.Random;
 
+import net.frostq.drs.ConsolePrinter;
+import net.frostq.drs.store.Store;
+
 /**
  * Small Unit : 소위단위체(小位單位體) / 단위체(單位體)
  * @author FrostQ
  * @serial id
  *
  */
-public class Unit {
+public class Unit extends Store implements ConsolePrinter {
+	private static final long serialVersionUID = -4948850424781279542L;
 	private long id;
 	private Buffer content;
 	private boolean allocated = false, lockedUp = false;
@@ -20,11 +24,13 @@ public class Unit {
 	
 	public void lockUp() {
 		this.lockedUp = true;
+		this.info("This unit has been locked up.");
 	}
 	
 	public void allocate() {
 		lockUp();
 		this.allocated = true;
+		this.info("This unit has been allocated.");
 	}
 	
 	public void allocate(Buffer content) {
@@ -33,7 +39,8 @@ public class Unit {
 	}
 	
 	protected void setId(long id) {
-		this.id = id;
+		this.id = !Units.unitPackages.parallelStream().anyMatch(x -> x.longValue() == id) ?
+				id : 0;
 	}
 	
 	public long getId() {
@@ -43,6 +50,7 @@ public class Unit {
 	public Unit setContent(Buffer content) {
 		if(this.isLockedUp()) return this;
 		this.content = content;
+		this.info("Content has been changed.");
 		return this;
 	}
 	
@@ -59,8 +67,12 @@ public class Unit {
 	}
 	
 	public void release() {
+		this.info("I'm gonna be released!");
+		
 		Units.unitPackages.removeIf(x -> x.longValue() == this.getId());
 		this.setContent(EmptyUnit.INSTANCE.getContent());
+		
+		this.info("Released content and myself from the list. Releasing ID.");
 		setId(0);
 	}
 	
@@ -92,5 +104,27 @@ public class Unit {
 	
 	public static boolean verifyId(long id) {
 		return !(id == 0 || id == -1 || Units.unitPackages.contains(id));
+	}
+
+	@Override
+	public String getPrefix() {
+		return "[Unit-" + this.getId() + "]";
+	}
+
+	@Override
+	public String getSuffix() {
+		return "";
+	}
+	
+	private boolean debugging = false;
+
+	@Override
+	public void setDebugging(boolean debugging) {
+		this.debugging = debugging;
+	}
+
+	@Override
+	public boolean isDebugging() {
+		return this.debugging;
 	}
 }
