@@ -1,8 +1,10 @@
 package net.frostq.drs.unit;
 
+import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import java.util.stream.IntStream;
 
 import com.google.common.collect.Lists;
 
@@ -12,7 +14,8 @@ import com.google.common.collect.Lists;
  * @serial groupName
  *
  */
-public class Units {
+public class Units implements Serializable {
+	private static final long serialVersionUID = 7206857199594050799L;
 	public static final List<Long> unitPackages = Lists.newArrayList();
 	public static final int MAX_SIZE = 256;
 	
@@ -49,11 +52,10 @@ public class Units {
 			assert offset.length == size.length;
 		else assert size.length == 1;
 		
-		int[] sortedOffset = IntStream.of(offset).sorted().toArray();
-		
 		List<Unit> temp = Lists.newArrayList();
 		
-		
+		for(int i = 0; i < offset.length; i++)
+			temp.addAll(Arrays.asList(this.get(offset[i], size.length > 1 ? size[i] : size[0])));
 		
 		return temp;
 	}
@@ -66,6 +68,14 @@ public class Units {
 	
 	public Unit get(int offset) {
 		return this.get(offset, 1)[0];
+	}
+	
+	public void export(OutputStream os) {
+		
+	}
+	
+	public void save() {
+		
 	}
 	
 	public boolean remove(Unit u) {
@@ -93,6 +103,10 @@ public class Units {
 					return unit.indexOf(o1) - unit.indexOf(o2);
 				}
 			});
+	}
+	
+	public String getGroupName() {
+		return this.groupName;
 	}
 	
 	public void closeUp() {
