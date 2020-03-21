@@ -1,39 +1,20 @@
-package net.frostq.drs.store;
+package net.frostq.drs.store.details;
+
+import net.frostq.drs.store.Store;
 
 /**
  * Header in the {@link Store} file.
  * @author FrostQ
  */
-public class Header {
-	private Store jurisdiction;
-	
+public class Header extends PropertyBox {
 	private int version;
 	private int headerSize, contentSize, footerSize;
 	private String fcs; //File Configuration Sign {Unit, Units, Data, ...?}
 	private String identifier;
 	private long exportTimestamp;
 	
-	public boolean setString(int offset, int endoffset, String str) {
-		
-	}
-	
-	public boolean setInt(int offset, int target) {
-		
-	}
-	
-	public boolean setLong(int offset, long target) {
-		
-	}
-	
-	public String getString(int offset, int endoffset) {
-		
-	}
-	
-	public int getInt(int offset) {
-		
-	}
-	
-	public long getLong(int offset) {
+	@Override
+	public void onDataUpdate() {
 		
 	}
 
@@ -43,6 +24,7 @@ public class Header {
 
 	protected void setVersion(int version) {
 		this.version = version;
+		onDataUpdate();
 	}
 
 	public int getHeaderSize() {
@@ -51,6 +33,7 @@ public class Header {
 
 	protected void setHeaderSize(int headerSize) {
 		this.headerSize = headerSize;
+		onDataUpdate();
 	}
 
 	public int getContentSize() {
@@ -59,6 +42,7 @@ public class Header {
 
 	protected void setContentSize(int contentSize) {
 		this.contentSize = contentSize;
+		onDataUpdate();
 	}
 
 	public int getFooterSize() {
@@ -67,6 +51,7 @@ public class Header {
 
 	protected void setFooterSize(int footerSize) {
 		this.footerSize = footerSize;
+		onDataUpdate();
 	}
 
 	public String getFcs() {
@@ -75,6 +60,7 @@ public class Header {
 
 	protected void setFcs(String fcs) {
 		this.fcs = fcs;
+		onDataUpdate();
 	}
 
 	public String getIdentifier() {
@@ -83,6 +69,7 @@ public class Header {
 
 	protected void setIdentifier(String identifier) {
 		this.identifier = identifier;
+		onDataUpdate();
 	}
 
 	public long getExportTimestamp() {
@@ -91,5 +78,6 @@ public class Header {
 
 	protected void setExportTimestamp(long exportTimestamp) {
 		this.exportTimestamp = exportTimestamp;
+		onDataUpdate();
 	}
 }

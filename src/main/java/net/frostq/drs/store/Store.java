@@ -13,6 +13,7 @@ public abstract class Store {
 	// Async 형식으로 여러 export 작업 속행 처리 추가 가능
 	
 	protected abstract byte[] data();
+	// protected abstract void importExported(byte[] data); 명칭 개정 필요, 인자를 ByteBuffer로 할 건지?
 	public abstract String identifier();
 	/**
 	 * Example: Unit-600010302001
@@ -24,10 +25,6 @@ public abstract class Store {
 	 * @return Extension name
 	 */
 	public abstract String extension();
-	
-	private Header header;
-	private Content content;
-	private Footer footer;
 	
 	public String getFileName() {
 		return file_name().trim() + "." + extension().trim();
@@ -41,9 +38,5 @@ public abstract class Store {
 		assert file_name().trim() != null && !file_name().trim().contentEquals("");
 		assert extension().trim() != null && !extension().trim().contentEquals("");
 		assert data().length > 0; //Data Verification 필요
-	}
-	
-	private Header createHeader() {
-		
 	}
 }

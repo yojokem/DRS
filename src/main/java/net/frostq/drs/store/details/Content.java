@@ -1,11 +1,13 @@
-package net.frostq.drs.store;
+package net.frostq.drs.store.details;
+
+import java.nio.ByteBuffer;
+
+import net.frostq.drs.store.Store;
 
 /**
  * Content between the {@link Header} and {@link Footer} in the {@link Store} file.
  * @author FrostQ
  */
 public class Content {
-	private Store jurisdiction;
-	
-	private byte[] content;
+	private Frame[] frames;
 }

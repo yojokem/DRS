@@ -58,7 +58,7 @@ public class Environment {
 	/*
 	 * 이제 export를 하면 어떡할 거니?
 	 * 뭐... ObjectOutputStream? 아니면... 다른 직렬화 방법이 있으려나?
-	 * Serializable로 다른 독자적 방식도 좋지만 귀찮다구...
+	 * Serializable로 다른 독자적 방식도 좋지만 귀찮다구... Serializable 취소! [20200321:200220]
 	 * 근데 Units나 Data로 Unit 하여튼 상위단위체로 묶으려면 필요할 거 아니야...하 참
 	 */
 	

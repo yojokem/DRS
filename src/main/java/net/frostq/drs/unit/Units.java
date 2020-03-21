@@ -26,6 +26,7 @@ public class Units extends Store implements ConsolePrinter {
 	
 	public void setSize(int offset) {
 		if(this.closedUp) return;
+		assert offset <= 255;
 		this.unit = unit.subList(offset, unit.size() - 1);
 	}
 	
@@ -40,11 +41,13 @@ public class Units extends Store implements ConsolePrinter {
 	
 	public void add(Unit u) {
 		if(this.closedUp) return;
+		assert unit.size() + 1 <= 256;
 		this.unit.add(u);
 	}
 	
 	public void set(int index, Unit u) {
 		if(this.closedUp) return;
+		assert index <= 255;
 		this.unit.set(index, u);
 	}
 	
@@ -64,19 +67,13 @@ public class Units extends Store implements ConsolePrinter {
 	public Unit[] get(int offset, int size) {
 		assert offset >= 0;
 		assert size > 0;
+		assert offset + size <= 255;
 		return this.unit.subList(offset, offset + size - 1).toArray(new Unit[] {});
 	}
 	
 	public Unit get(int offset) {
+		assert offset <= 255;
 		return this.get(offset, 1)[0];
-	}
-	
-	public void export(OutputStream os) {
-		
-	}
-	
-	public void save() {
-		
 	}
 	
 	public boolean remove(Unit u) {
@@ -92,6 +89,7 @@ public class Units extends Store implements ConsolePrinter {
 	
 	public void remove(int index) {
 		if(this.closedUp) return;
+		assert index <= 255;
 		if(this.unit.get(index) != null)
 			this.unit.set(index, EmptyUnit.INSTANCE);
 	}
