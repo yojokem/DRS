@@ -1,4 +1,4 @@
-package net.frostq.drs.store.details;
+package net.frostq.drs.store;
 
 /**
  * Verification class for the {@link Store}
