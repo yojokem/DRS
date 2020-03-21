@@ -1,7 +1,19 @@
 package net.frostq.drs;
 
+/**
+ * Console Printer Interface for classes
+ * @author FrostQ
+ */
 public interface ConsolePrinter {
+	/**
+	 * Get the prefix name of the class
+	 * @return Prefix name of the class
+	 */
 	public String getPrefix();
+	/**
+	 * Get the suffix name of the class
+	 * @return suffix name of the class
+	 */
 	public String getSuffix();
 	
 	public default void outprint(Object m) {
@@ -24,7 +36,15 @@ public interface ConsolePrinter {
 		outprintln("[INFO] " + m);
 	}
 	
+	/**
+	 * Set the status of debugging.
+	 * @param debugging the boolean value for debugging
+	 */
 	public void setDebugging(boolean debugging);
+	/**
+	 * Get the status of debugging
+	 * @return the status boolean value for debugging
+	 */
 	public boolean isDebugging();
 	
 	public default void debug(Object m) {

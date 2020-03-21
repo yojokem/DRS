@@ -17,7 +17,6 @@ import net.frostq.drs.store.Store;
  *
  */
 public class Units extends Store implements ConsolePrinter {
-	private static final long serialVersionUID = 3557080564434746456L;
 	public static final List<Long> unitPackages = Lists.newArrayList();
 	public static final int MAX_SIZE = 256;
 	

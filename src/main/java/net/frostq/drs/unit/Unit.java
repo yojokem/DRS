@@ -13,10 +13,12 @@ import net.frostq.drs.store.Store;
  *
  */
 public class Unit extends Store implements ConsolePrinter {
-	private static final long serialVersionUID = -4948850424781279542L;
 	private long id;
 	private Buffer content;
 	private boolean allocated = false, lockedUp = false;
+	
+	// 네트워크 송신 시 {(byte[]) id / ByteBuffer content} 형태로 발송.
+	// NIO 사용 여부 결정 必
 	
 	public Unit(Buffer content) {
 		this.content = content;

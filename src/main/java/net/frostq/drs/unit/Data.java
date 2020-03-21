@@ -9,7 +9,6 @@ import net.frostq.drs.store.Store;
  *
  */
 public class Data extends Store {
-	private static final long serialVersionUID = 4966512505959630472L;
 	private String name;
 	private long organized = System.currentTimeMillis();
 	

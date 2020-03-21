@@ -31,7 +31,9 @@ public class Environment {
 	 * @param u {@link Unit} to export
 	 */
 	public void export(Path dir, Unit u) {
-		
+		assert Files.isDirectory(dir);
+		u.applicate();
+		u.export(dir);
 	}
 	
 	/**
@@ -40,7 +42,9 @@ public class Environment {
 	 * @param us {@link Units} to export
 	 */
 	public void export(Path dir, Units us) {
-		
+		assert Files.isDirectory(dir);
+		us.applicate();
+		us.export(dir);
 	}
 	
 	/**
@@ -49,7 +53,9 @@ public class Environment {
 	 * @param d {@link Data} to export
 	 */
 	public void export(Path dir, Data d) {
-		
+		assert Files.isDirectory(dir);
+		d.applicate();
+		d.export(dir);
 	}
 	
 	/*
